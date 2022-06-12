@@ -1,0 +1,25 @@
+#container{
+    display: flex;
+    justify-content: center;
+    /* min-height: 500px; */
+}
+
+#calculator{
+    display: grid;
+    column-gap: 3px;
+    row-gap: 3px;
+    grid-template-columns: auto auto auto auto;
+}
+#calculator button{
+    padding: 25px;
+    
+}
+#display{
+    grid-column: 1 / -1;
+    padding: 25px;
+    text-align: right;
+    font-size: 35px;
+}
+.ac{
+    grid-column: span 2;
+}
