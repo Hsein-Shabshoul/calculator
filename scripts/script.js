@@ -1,13 +1,10 @@
 const button = document.querySelectorAll("button");
 const display = document.getElementById("display");
 let displaytext = "";
-let totalnumber = 0;
-let firstnum = null;
-let secondnum = null;
-let lastnum = null;
 let firstOperator = null;
-let secondOperator = null;
-let numberArray, first, second, result, decimal = false, equal = false;
+let numberArray, first, second, result;
+let decimal = false, equal = false;
+
 for(let i = 0; i < button.length; i++){
     button[i].addEventListener("click", function() {
         if(button[i].classList.contains("digit")){
@@ -41,6 +38,9 @@ for(let i = 0; i < button.length; i++){
         }
         else if(button[i].classList.contains("percent")){
             console.log(button[i].value);
+            if(firstOperator !== null){
+                operatorInput(firstOperator);
+            }
             percent(displaytext);
         }
         else if(button[i].classList.contains("backspace")){
@@ -71,15 +71,14 @@ function digitInput(value){
     }
 }
 
-function operatorInput(operator){
-    if(firstOperator === null){
-        console.log("null operator");
+function operatorInput(operator) {
+    if (firstOperator === null) {
         firstOperator = operator;
         refreshdisplay(operator);
         decimal = false;
         equal = false;
     }
-    else if (firstOperator !== null){
+    else {
         numberArray = displaytext.split(firstOperator);
         first = Number(numberArray[0]);
         second = Number(numberArray[1]);
@@ -144,13 +143,7 @@ function percent(number){
 
 function clear(){
     display.innerHTML = "0";
-    firstnum = null;
-    totalnumber = 0;
-    firstnum = null;
-    secondnum = null;
-    lastnum = null;
     firstOperator = null;
-    secondOperator = null;
     displaytext = "";
     decimal = false;
 }
@@ -161,4 +154,3 @@ function backspace(){
     if(firstOperator !== null)
         firstOperator = null;
 }
-
