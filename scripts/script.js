@@ -82,12 +82,11 @@ function operatorInput(operator) {
         }
         first = operate(first, second, firstOperator);
         firstOperator = operator;
-        first = round(first, 10);
+        first = round(first, 5);
         displaytext = first + firstOperator;
         display.innerHTML = displaytext;
         decimal = false;
     }
-    
 }
 
 function equals(operator) {
@@ -97,7 +96,7 @@ function equals(operator) {
         second = Number(numberArray[1]);
         first = operate(first, second, firstOperator);
         firstOperator = operator;
-        displaytext = round(first, 10);
+        displaytext = round(first, 5);
         display.innerHTML = displaytext;
         decimal = false;
         firstOperator = null;
@@ -133,7 +132,7 @@ function percent (number) {
     }
     else {
         first = (first/100);
-        displaytext = round(first, 10);
+        displaytext = round(first, 5);
         display.innerHTML = displaytext;
         equal = true;
     }
