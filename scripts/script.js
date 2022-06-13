@@ -3,7 +3,7 @@ const display = document.getElementById("display");
 let displaytext = "";
 let firstOperator = null;
 let numberArray, first, second, result;
-let decimal = false, equal = false;
+let decimal = false, equal = false, firstzero = false;
 
 for (let i = 0; i < button.length; i++) {
     button[i].addEventListener("click", function() {
@@ -44,11 +44,18 @@ for (let i = 0; i < button.length; i++) {
 }
 
 function refreshdisplay(value) {
+    if(value === "0" && firstzero === false){
+        displaytext = value;
+        display.innerHTML = displaytext;
+        firstzero = true;
+    }
+    else {
     displaytext += value;
     if(displaytext.length > 13) {
         displaytext = displaytext.substring(0, 16);
     }
     display.innerHTML = displaytext;
+    }
 }
 
 function digitInput(value) {
@@ -60,9 +67,10 @@ function digitInput(value) {
         display.innerHTML = displaytext;
         equal = false;
     }
-    else{
+    else {
         refreshdisplay(value);
     }
+    
 }
 
 function operatorInput(operator) {
@@ -72,7 +80,7 @@ function operatorInput(operator) {
         decimal = false;
         equal = false;
     }
-    else if (firstOperator !== null ){
+    else if (firstOperator !== null ) {
         numberArray = displaytext.split(firstOperator);
         first = Number(numberArray[0]);
         second = Number(numberArray[1]);
@@ -96,11 +104,21 @@ function equals(operator) {
         second = Number(numberArray[1]);
         first = operate(first, second, firstOperator);
         firstOperator = operator;
-        displaytext = round(first, 5);
-        display.innerHTML = displaytext;
-        decimal = false;
-        firstOperator = null;
-        equal =  true;
+        if(first !== "Yeah Nah") {
+            displaytext = round(first, 5);
+            display.innerHTML = displaytext;
+            decimal = false;
+            firstOperator = null;
+            equal =  true;
+        }
+        else {
+            displaytext = first;
+            display.innerHTML = displaytext;
+            decimal = false;
+            firstOperator = null;
+            equal =  true;
+        }
+            
     }
 }
 
