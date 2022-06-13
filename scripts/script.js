@@ -1,6 +1,6 @@
 const button = document.querySelectorAll("button");
 const display = document.getElementById("display");
-let displaytext = "";
+let displayText = "";
 let firstOperator = null;
 let numberArray, first, second, result;
 let decimal = false, equal = false, firstzero = false;
@@ -18,13 +18,13 @@ for (let i = 0; i < button.length; i++) {
         }
         else if (button[i].classList.contains("decimal")) {
             if(equal == true){
-                displaytext = ".";
-                display.innerHTML = displaytext;
+                displayText = ".";
+                display.innerHTML = displayText;
                 equal = false;
                 decimal = true;
             }
             else if (decimal == false){
-                refreshdisplay(button[i].value);
+                refreshDisplay(button[i].value);
                 decimal = true;
             }    
         }
@@ -32,7 +32,7 @@ for (let i = 0; i < button.length; i++) {
             if (firstOperator !== null){
                 operatorInput(firstOperator);
             }
-            percent(displaytext);
+            percent(displayText);
         }
         else if (button[i].classList.contains("backspace")) {
             backspace();
@@ -43,32 +43,27 @@ for (let i = 0; i < button.length; i++) {
     });  
 }
 
-function refreshdisplay(value) {
-    if(value === "0" && firstzero === false){
-        displaytext = value;
-        display.innerHTML = displaytext;
-        firstzero = true;
+function refreshDisplay(value) {
+    
+    displayText += value;
+    if(displayText.length > 13) {
+        displayText = displayText.substring(0, 16);
     }
-    else {
-    displaytext += value;
-    if(displaytext.length > 13) {
-        displaytext = displaytext.substring(0, 16);
-    }
-    display.innerHTML = displaytext;
-    }
+    display.innerHTML = displayText;
+    
 }
 
 function digitInput(value) {
     if(equal == true){
-        displaytext = value;
-        if(displaytext.length > 13) {
-            displaytext = displaytext.substring(0, 16);
+        displayText = value;
+        if(displayText.length > 13) {
+            displayText = displayText.substring(0, 16);
         }
-        display.innerHTML = displaytext;
+        display.innerHTML = displayText;
         equal = false;
     }
     else {
-        refreshdisplay(value);
+        refreshDisplay(value);
     }
     
 }
@@ -76,12 +71,12 @@ function digitInput(value) {
 function operatorInput(operator) {
     if (firstOperator === null) {
         firstOperator = operator;
-        refreshdisplay(operator);
+        refreshDisplay(operator);
         decimal = false;
         equal = false;
     }
     else if (firstOperator !== null ) {
-        numberArray = displaytext.split(firstOperator);
+        numberArray = displayText.split(firstOperator);
         first = Number(numberArray[0]);
         second = Number(numberArray[1]);
         if (second === 0) {
@@ -91,29 +86,29 @@ function operatorInput(operator) {
         first = operate(first, second, firstOperator);
         firstOperator = operator;
         first = round(first, 5);
-        displaytext = first + firstOperator;
-        display.innerHTML = displaytext;
+        displayText = first + firstOperator;
+        display.innerHTML = displayText;
         decimal = false;
     }
 }
 
 function equals(operator) {
     if (firstOperator !== null) {
-        numberArray = displaytext.split(firstOperator);
+        numberArray = displayText.split(firstOperator);
         first = Number(numberArray[0]);
         second = Number(numberArray[1]);
         first = operate(first, second, firstOperator);
         firstOperator = operator;
         if(first !== "Yeah Nah") {
-            displaytext = round(first, 5);
-            display.innerHTML = displaytext;
+            displayText = round(first, 5);
+            display.innerHTML = displayText;
             decimal = false;
             firstOperator = null;
             equal =  true;
         }
         else {
-            displaytext = first;
-            display.innerHTML = displaytext;
+            displayText = first;
+            display.innerHTML = displayText;
             decimal = false;
             firstOperator = null;
             equal =  true;
@@ -144,14 +139,14 @@ function operate(first, second, operator){
 
 function percent (number) {
     if (firstOperator == null) {
-    displaytext = (number/100).toString();
-    display.innerHTML = displaytext;
+    displayText = (number/100).toString();
+    display.innerHTML = displayText;
     equal = true;
     }
     else {
         first = (first/100);
-        displaytext = round(first, 5);
-        display.innerHTML = displaytext;
+        displayText = round(first, 5);
+        display.innerHTML = displayText;
         equal = true;
     }
 }
@@ -159,20 +154,20 @@ function percent (number) {
 function clear() {
     display.innerHTML = "0";
     firstOperator = null;
-    displaytext = "";
+    displayText = "";
     decimal = false;
 }
 
 function backspace() {
-    let deleted = displaytext.slice(-1);
+    let deleted = displayText.slice(-1);
     if (deleted === ".")
         decimal = false;
     if (firstOperator === deleted)
         firstOperator = null;
-    displaytext = displaytext.slice(0, -1);
-    if (displaytext.length < 1)
-        displaytext = "0";
-    display.innerHTML = displaytext;
+    displayText = displayText.slice(0, -1);
+    if (displayText.length < 1)
+        displayText = "0";
+    display.innerHTML = displayText;
     
 }
 
