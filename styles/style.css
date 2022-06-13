@@ -1,37 +1,59 @@
-body{
+body {
     background-color: rgb(37, 34, 34);
 }
-#container{
+#container {
     display: flex;
     justify-content: center;
-    margin: 5%;
-    
+    margin: 5%;  
 }
-
-#calculator{
+#calculator {
     border-style: solid;
-    border-color: rgb(47, 127, 159);
-    border-width: 7px;
-    border-radius: 20px;
+    border-color: rgb(47, 120, 159);
+    border-width: 10px;
+    border-radius: 5px;
     display: grid;
-    column-gap: 3px;
-    row-gap: 3px;
+    column-gap: 1px;
+    row-gap: 1px;
     grid-template-columns: auto auto auto auto;
 }
-#calculator button{
+button {
     padding: 35px;
     font-size: 25px;
-    
+    background-color: rgb(14, 144, 144);
 }
 
-#display{
+#display {
     grid-column: 1 / -1;
-    border-radius: 20px;
-    padding: 25px;
+    padding: 15px;
     text-align: right;
-    font-size: 40px;
-    background-color: rgb(74, 144, 144);
+    font-size: 50px;
+    background-color: rgb(28, 84, 84);
+    color: azure;
 }
-.ac{
+.ac {
     grid-column: span 2;
+    background-color: rgb(241, 143, 37);
+}
+.ac:hover {
+    background-color: rgba(255, 14, 14, 0.91);
+    color: azure;
+}
+
+.digit:hover, .decimal:hover, .backspace:hover {
+    background-color: rgb(28, 84, 84);
+    color: azure;
+}
+.operator, .percent {
+    background-color: rgb(4, 101, 133);
+}
+.operator:hover, .percent:hover {
+    background-color: rgb(1, 70, 139);
+    color: azure;
+}
+.equal {
+    background-color: rgb(1, 70, 139);
+}
+.equal:hover {
+    background-color: rgba(1, 70, 139, 0.749);
+    color: azure;
 }
