@@ -44,7 +44,6 @@ for (let i = 0; i < button.length; i++) {
 }
 
 function refreshDisplay(value) {
-    
     displayText += value;
     if(displayText.length > 13) {
         displayText = displayText.substring(0, 16);
@@ -85,7 +84,7 @@ function operatorInput(operator) {
         }
         first = operate(first, second, firstOperator);
         firstOperator = operator;
-        first = round(first, 5);
+        first = round(first, 6);
         displayText = first + firstOperator;
         display.innerHTML = displayText;
         decimal = false;
@@ -100,7 +99,7 @@ function equals(operator) {
         first = operate(first, second, firstOperator);
         firstOperator = operator;
         if(first !== "Yeah Nah") {
-            displayText = round(first, 5);
+            displayText = round(first, 6);
             display.innerHTML = displayText;
             decimal = false;
             firstOperator = null;
@@ -145,7 +144,7 @@ function percent (number) {
     }
     else {
         first = (first/100);
-        displayText = round(first, 5);
+        displayText = round(first, 6);
         display.innerHTML = displayText;
         equal = true;
     }
